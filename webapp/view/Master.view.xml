@@ -1,0 +1,78 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:core="sap.ui.core"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    xmlns:tnt="sap.tnt" controllerName="usrnotifications.controller.Master">
+    <Page title="{i18n>allnotif}" showNavButton="false" navButtonPress="onNavBack">
+        <content>
+            <List id="NotificationList" items="{
+                path: '/xTQAxUSR_NOTIF_DD',
+                sorter: [ 
+                        { 
+                            path: 'readed',
+                            descending: false,
+                            group: true
+                        },
+                        {
+                            path: 'sended_at',
+                            descending: true
+                        },
+                        {
+                            path: 'sended_at_hours',
+                            descending: true
+                        }
+                    ],
+                    filters: [
+                        {
+                            path: 'sended_at',
+                            operator: 'NE',
+                            value1: null
+                        },
+                        {
+                            path: 'sended_at_hours',
+                            operator: 'NE',
+                            value1: null
+                        }
+                    ],
+                groupHeaderFactory: '.getGroupHeader'
+                }" growing="true" growingThreshold="10">
+                <headerToolbar>
+                    <Toolbar id="_IDGenToolbar1" design="Solid">
+                        <ToolbarSpacer id="_IDGenToolbarSpacer1" />
+
+                        <Text id="_IDGenText2" text="{i18n>PriorityText}"/>
+                        <ComboBox id="filterComboBox" width="150px">
+                            <items>
+                                <core:Item id="_IDGenItem3" key="1" text="{i18n>High}" />
+                                <core:Item id="_IDGenItem4" key="2" text="{i18n>Medium}" />
+                                <core:Item id="_IDGenItem5" key="3" text="{i18n>Low}" />
+                            </items>
+                        </ComboBox>
+                        <Button id="_IDGenButton2" text="Filtrar" press="onFilterButtonPress" />
+                        <Button id="_IDGenButtonClear" icon="sap-icon://clear-filter" press="onClearFiltersPress" />
+                        <!-- Novo botão para marcar tudo como lido -->
+                        <Button id="_IDGenButtonMarkAllRead" text="{i18n>MarkAllRead}" press="onMarkAllReadPress" />
+                    </Toolbar>
+                </headerToolbar>
+
+                <items>
+                    <ObjectListItem id="_IDGenObjectListItem1" title="{title}" type="Active" press="onListItemPress" showMarkers="true">
+                        <firstStatus>
+                            <ObjectStatus id="_IDGenObjectStatus1" text="{ path: 'priority', formatter: '.formatter.onPriority' }" state="{ path: 'priority', formatter: '.formatter.onPriorityState' }" />
+                        </firstStatus>
+                        <ObjectAttribute id="_IDGenObjectAttribute1" text="{description}" />
+                        <ObjectAttribute id="_IDGenObjectAttribute2" text="{
+                            parts: [
+                                {path: 'sended_at', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }},
+                                {path: 'sended_at_hours', formatter: '.formatter.onHours' }
+                            ]
+                            }" />
+                    </ObjectListItem>
+                </items>
+            </List>
+        </content>
+    </Page>
+</mvc:View>
