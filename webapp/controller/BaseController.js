@@ -61,6 +61,7 @@ sap.ui.define([
         },
 
         onNavBack: function () {
+            sessionStorage.setItem("goToLaunchpad", "X");
             var sPreviousHash = History.getInstance().getPreviousHash();
 
             if (sPreviousHash !== undefined) {
