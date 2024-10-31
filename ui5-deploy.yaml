@@ -14,12 +14,12 @@ builder:
       afterTask: generateCachebusterInfo
       configuration:
         target:
-          url: http://erpdev.rnm.local:50000/
-          client: "610"
+          url: http://erpdd2.rnm.local:50000
+          client: "300"
         app:
           name: /TQA/USR_NOTIF
           description: ""
           package: /TQA/LVP
-          transport: DEVK924974
+          transport: DD2K901744
         exclude:
           - /test/

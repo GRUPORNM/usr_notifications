@@ -1,0 +1,33 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form" controllerName="usrnotifications.controller.Detail">
+    <Page title="{Detail>/Global}" id="mainPage" visible="false">
+        <content>
+            <f:SimpleForm id="notificationForm" layout="ResponsiveGridLayout" editable="true" title="{i18n>notifdetail}">
+                <f:content>
+                    <Label text="{i18n>Title}" />
+                    <Text text="{Detail>/title}" />
+
+                    <Label text="{i18n>Description}" />
+                    <Text text="{Detail>/description}" />
+
+                    <Label text="{i18n>PriorityText}" />
+                    <ObjectStatus text="{path: 'Detail>/priority', formatter: '.formatter.onPriority'}" state="{path: 'Detail>/priority', formatter: '.formatter.onPriorityState'}" />
+
+                    <Label text="{i18n>CreatedOn}" />
+                    <Text id="createdOnText" text="{path: 'Detail>/sended_at', formatter: '.formatter.formatDate'}, {path: 'Detail>/sended_at_hours', formatter:'.formatter.onHours'}" />
+                </f:content>
+            </f:SimpleForm>
+        </content>
+        <footer>
+            <Toolbar>
+                <ToolbarSpacer />
+                <Button text="{i18n>OpenApp}" press="onNavToApplication" visible="{= !!${Detail>/target_path} }" />
+                <Button id="btMarkRead" press="onMarkRead" />
+                <Button text="{i18n>Delete}" press="onDeleteNotif"/>
+                <Button text="{i18n>ReportProblem}" press="onReportProblem" />
+            </Toolbar>
+        </footer>
+    </Page>
+</mvc:View>
